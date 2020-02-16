@@ -20,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/item_note_title"
+                android:id="@+id/iten_noteTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/item_note_text"
+                android:id="@+id/iten_noteText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -41,9 +41,9 @@
                 android:text="TextView"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/item_note_title"
-                app:layout_constraintStart_toStartOf="@+id/item_note_title"
-                app:layout_constraintTop_toBottomOf="@+id/item_note_title" />
+                app:layout_constraintEnd_toEndOf="@+id/iten_noteTitle"
+                app:layout_constraintStart_toStartOf="@+id/iten_noteTitle"
+                app:layout_constraintTop_toBottomOf="@+id/iten_noteTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

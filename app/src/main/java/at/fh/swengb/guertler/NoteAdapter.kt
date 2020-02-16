@@ -16,25 +16,30 @@ class NoteAdapter(val clickListener: (note: Note) -> Unit): RecyclerView.Adapter
             return NoteViewHolder(noteItemView, clickListener)
         }
 
-        override fun getItemCount(): Int {
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int)
+    {
+        holder.bindItem(noteList[position])
+    }
+
+        override fun getItemCount(): Int
+        {
             return noteList.count()
         }
 
-        override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-            holder.bindItem(noteList[position])
-        }
 
 
-        fun updateList(newList: List<Note>) {
+        fun updateList(newList: List<Note>)
+        {
             noteList = newList
             notifyDataSetChanged()
         }
     }
 
-class NoteViewHolder(itemView: View, val clickListener: (note: Note) -> Unit): RecyclerView.ViewHolder(itemView) {
+class NoteViewHolder(itemView: View, val clickListener: (note: Note) -> Unit): RecyclerView.ViewHolder(itemView)
+{
     fun bindItem(note: Note) {
-        itemView.item_note_title.text = note.title
-        itemView.item_note_text.text = note.text
+        itemView.iten_noteTitle.text = note.title
+        itemView.iten_noteText.text = note.text
 
 
         itemView.setOnClickListener{

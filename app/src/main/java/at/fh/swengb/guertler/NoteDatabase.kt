@@ -9,15 +9,19 @@ import androidx.room.RoomDatabase
 abstract class NoteDatabase : RoomDatabase() {
     abstract val NoteDao: NoteDao
 
-    companion object {
+    companion object
+    {
         private var INSTANCE: NoteDatabase? = null
-        fun getDatabase(context: Context): NoteDatabase {
-            return INSTANCE ?: synchronized(this) {
+        fun getDatabase(context: Context): NoteDatabase
+        {
+            return INSTANCE ?: synchronized(this)
+            {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
         }
 
-        private fun buildDatabase(context: Context): NoteDatabase {
+        private fun buildDatabase(context: Context): NoteDatabase
+        {
             return Room.databaseBuilder(
                 context,
                 NoteDatabase::class.java, "note-db"

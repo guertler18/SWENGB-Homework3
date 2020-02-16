@@ -11,13 +11,15 @@ import retrofit2.http.POST
 
 object NoteApi {
     val token = ""
-    const val baseUrl = "https://notes.bloder.xyz"
-    val retrofit: Retrofit
     val retrofitService: NoteApiService
-    init {val moshi = Moshi.Builder().build()
-    retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFactory.create(moshi)).baseUrl(
-        baseUrl).build()
-    retrofitService = retrofit.create(NoteApiService::class.java)}
+    val retrofit: Retrofit
+    const val baseUrl = "https://notes.bloder.xyz"
+
+
+    init { val moshi = Moshi.Builder().build()
+    retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFactory.create(moshi)).baseUrl(baseUrl).build()
+    retrofitService = retrofit.create(NoteApiService::class.java)
+    }
 
 }
 interface NoteApiService {
@@ -26,5 +28,5 @@ interface NoteApiService {
     @POST("/login")
     fun login(@Body body: AuthRequest): Call<AuthResponse>
     @POST("/notes")
-    fun addOrUpdateNote(@Header("access-token") accessToken: String, @Body body: Note): Call<Note>
+    fun addupdateNote(@Header("access-token") accessToken: String, @Body body: Note): Call<Note>
 }

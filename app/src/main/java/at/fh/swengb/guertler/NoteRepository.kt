@@ -7,16 +7,19 @@ import retrofit2.Response
 
 object NoteRepository {
 
-    fun getNotes(token: String, lastSync: Long, success:(noteResponse: NotesResponse)->Unit,error:(errorMessage:String)->Unit){
+    fun getNote(token: String, lastSync: Long, success:(noteResponse: NotesResponse)->Unit,error:(errorMessage:String)->Unit)
+    {
         NoteApi.retrofitService.notes(token, lastSync).enqueue(object : Callback<NotesResponse>{
 
-            override fun onFailure(call: Call<NotesResponse>, t: Throwable) {
+            override fun onFailure(call: Call<NotesResponse>, t: Throwable)
+            {
                 error("Call failed")
             }
 
             override fun onResponse(call: Call<NotesResponse>, response: Response<NotesResponse>) {
                 val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null) {
+                if (response.isSuccessful && responseBody != null)
+                {
                     success(responseBody)
                 } else {
                     error("There is something wrong")
@@ -25,8 +28,9 @@ object NoteRepository {
         })
     }
 
-    fun uploadNote (token: String, note2Upload: Note, success: (note: Note)->Unit, error: (errorMessage: String)->Unit){
-        NoteApi.retrofitService.addOrUpdateNote(token, note2Upload).enqueue(object : Callback<Note>{
+    fun NoteUpload (token: String, Uploaded_Note: Note, success: (note: Note)->Unit, error: (errorMessage: String)->Unit)
+    {
+        NoteApi.retrofitService.addupdateNote(token, Uploaded_Note).enqueue(object : Callback<Note>{
 
             override fun onFailure(call: Call<Note>, t: Throwable) {
                 error("Call failed! " + t.localizedMessage)
@@ -40,7 +44,20 @@ object NoteRepository {
                     error("There is something wrong " + response.message())
                 }
             }
-        })
+        }
+        )
+    }
+
+
+
+
+
+
+
+
+    fun getNoteById (context: Context, id: String):Note {
+        val db = NoteDatabase.getDatabase(context)
+        return db.NoteDao.findNoteById(id)
     }
 
     fun addNote(context: Context, newNote: Note) {
@@ -48,18 +65,15 @@ object NoteRepository {
         db.NoteDao.insert(newNote)
     }
 
-    fun getNoteById (context: Context, id: String):Note {
-        val db = NoteDatabase.getDatabase(context)
-        return db.NoteDao.findNoteById(id)
-    }
-
-    fun getNotesAll (context: Context):List<Note> {
-        val db = NoteDatabase.getDatabase(context)
-        return db.NoteDao.getNotesAll()
-    }
-
     fun clearDb (context: Context) {
         val db = NoteDatabase.getDatabase(context)
         return db.NoteDao.deleteAllNotes()
     }
+
+    fun getNoteAll (context: Context):List<Note> {
+        val db = NoteDatabase.getDatabase(context)
+        return db.NoteDao.getNoteAll()
+    }
+
+
 }
